@@ -1,0 +1,59 @@
+
+import streamlit as st
+
+# عنوان التطبيق
+st.set_page_config(page_title="Gene Explorer", page_icon=":dna:")
+st.markdown("<h1 style='color:purple;'>:dna: Gene Explorer</h1>", unsafe_allow_html=True)
+st.write("تطبيق بسيط لعرض معلومات جينية باستخدام البرمجة.")
+
+# قاعدة بيانات الجينات
+gene_data = {
+    "BRCA1": {
+        "Chromosome": "17",
+        "Location": "17q21.31",
+        "Function": "DNA repair associated with homologous recombination",
+        "Diseases": "Breast and ovarian cancer",
+        "Common Mutations": ["185delAG", "5382insC"]
+    },
+    "TP53": {
+        "Chromosome": "17",
+        "Location": "17p13.1",
+        "Function": "Tumor suppressor, regulates cell cycle",
+        "Diseases": "Li-Fraumeni syndrome, many cancers",
+        "Common Mutations": ["R175H", "R248Q"]
+    },
+    "CFTR": {
+        "Chromosome": "7",
+        "Location": "7q31.2",
+        "Function": "Chloride channel, regulates salt transport",
+        "Diseases": "Cystic fibrosis",
+        "Common Mutations": ["ΔF508", "G551D"]
+    },
+    "EGFR": {
+        "Chromosome": "7",
+        "Location": "7p11.2",
+        "Function": "Receptor tyrosine kinase involved in cell growth",
+        "Diseases": "Lung cancer, glioblastoma",
+        "Common Mutations": ["L858R", "T790M"]
+    },
+    "MYC": {
+        "Chromosome": "8",
+        "Location": "8q24.21",
+        "Function": "Transcription factor that regulates cell proliferation",
+        "Diseases": "Burkitt lymphoma, other cancers",
+        "Common Mutations": ["Amplification", "Translocation"]
+    }
+}
+
+# اختيار الجين من قائمة
+gene_input = st.selectbox("اختر اسم الجين:", list(gene_data.keys()))
+
+# عرض البيانات
+if gene_input:
+    data = gene_data[gene_input]
+    st.subheader(f"معلومات عن الجين {gene_input}:")
+    st.write(f"**الكروموسوم:** {data['Chromosome']}")
+    st.write(f"**الموقع الجيني:** {data['Location']}")
+    st.write(f"**الوظيفة:** {data['Function']}")
+    st.write(f"**الأمراض المرتبطة:** {data['Diseases']}")
+    st.write(f"**الطفرات الشائعة:** {', '.join(data['Common Mutations'])}")
